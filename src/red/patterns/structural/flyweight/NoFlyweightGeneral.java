@@ -34,6 +34,7 @@ public class NoFlyweightGeneral {
             }
         };
 
+        // Program stops doing work resulting in livelock when one of the workers gets OutOfMemoryError.
         CompletableFuture.runAsync(runnable).get();
 
         System.out.println(airplaneList.size());
