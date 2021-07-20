@@ -8,25 +8,29 @@ import java.util.Set;
  * Date: 20.07.2021
  */
 public class PlaneControlMediator implements Mediator {
-    private Set<Plane> planeSet = new HashSet<>();
+    private final Set<Sender> senderSet = new HashSet<>();
 
-    public void addPlane(Plane plane) {
-        planeSet.add(plane);
+    public void addSender(Sender sender) {
+        senderSet.add(sender);
+        System.out.println("Added " + sender);
     }
 
-    public void removePlane(Plane plane) {
-        planeSet.remove(plane);
+    public void removeSender(Sender sender) {
+        senderSet.remove(sender);
+        System.out.println("Removed " + sender);
     }
-
-
 
     @Override
-    public void notify(Sender sender, String event) {
-        if (!(sender instanceof Plane))
-            return;
+    public void mediateEvent(Sender sender, String event) {
+        senderSet.stream()
+                .filter(s -> !s.equals(sender))
+                .forEach(s -> s.processEvent(sender, event));
+    }
 
-        if (event.equals("landing")) {
-
-        }
+    @Override
+    public String toString() {
+        return "PlaneControlMediator{" +
+                "senderSet=" + senderSet.size() +
+                '}';
     }
 }

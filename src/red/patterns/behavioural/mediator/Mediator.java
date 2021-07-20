@@ -5,5 +5,5 @@ package red.patterns.behavioural.mediator;
  * Date: 20.07.2021
  */
 public interface Mediator {
-    void notify(Sender sender, String event);
+    void mediateEvent(Sender sender, String event);
 }
